@@ -1,4 +1,4 @@
-# Easy Image Editor 🎨
+# Image Editor 🎨
 
 ## 📄 Project Description  
 
