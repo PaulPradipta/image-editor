@@ -15,7 +15,7 @@ let brightness = "100",
   grayscale = "0",
   hueRotate = "0",
   sepia = "0",
-  blurImage = "0"
+  blurImage = "0",
   contrast = "100";
 
 let rotate = 0,
@@ -61,7 +61,7 @@ filterOptions.forEach((option) => {
     } else if (option.id === "hue-rotate") {
       filterSlider.max = "360"
       filterSlider.value = hueRotate
-      filterValue.innerText = `${hueRotate}deg`
+      filterValue.innerText = `${hueRotate} deg`
     } else if(option.id === "sepia") {
       filterSlider.max = "100"
       filterSlider.value = sepia
@@ -69,7 +69,7 @@ filterOptions.forEach((option) => {
     } else if(option.id === "blurImage") {
       filterSlider.max = "20"
       filterSlider.value = blurImage
-      filterValue.innerText = `${blurImage}px`
+      filterValue.innerText = `${blurImage} px`
     }
       else {
       filterSlider.max = "200";
@@ -92,10 +92,12 @@ const updateFilter = () => {
   } else if (selectedFilter.id === 'grayscale'){
     grayscale = filterSlider.value;
   } else if(selectedFilter.id === "hue-rotate") {
+    filterValue.innerText = `${filterSlider.value} deg`;
     hueRotate = filterSlider.value;
   } else if(selectedFilter.id === "sepia") {
     sepia = filterSlider.value;
   } else if(selectedFilter.id === "blurImage") {
+    filterValue.innerText = `${filterSlider.value} px`;
     blurImage = filterSlider.value;
   }
   else {
@@ -127,7 +129,7 @@ const resetFilters = () => {
     (hueRotate = "0"),
     (sepia = "0"),
     (blurImage = "0"),
-    (contrast = "0")
+    (contrast = "100")
 
   (rotate = 0), (flipHorizontal = 1), (flipVertical = 1);
 
@@ -142,7 +144,8 @@ const saveImage = () => {
   canvas.width = previewImg.naturalWidth;
   canvas.height = previewImg.naturalHeight;
 
-  context.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
+  context.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%) contrast(${contrast}%)
+  hue-rotate(${hueRotate}deg) sepia(${sepia}%) blur(${blurImage}px)`;
 
   context.translate(canvas.width / 2, canvas.height / 2);
 
