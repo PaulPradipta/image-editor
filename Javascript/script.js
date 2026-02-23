@@ -13,6 +13,9 @@ let brightness = "100",
   saturation = "100",
   inversion = "0",
   grayscale = "0",
+  hueRotate = "0",
+  sepia = "0",
+  blurImage = "0"
   contrast = "100";
 
 let rotate = 0,
@@ -20,7 +23,7 @@ let rotate = 0,
   flipVertical = 1;
 
 const applyFilter = () => {
-  previewImg.style.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%) contrast(${contrast}%)`;
+  previewImg.style.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%) contrast(${contrast}%) hue-rotate(${hueRotate}deg) sepia(${sepia}%) blur(${blurImage}px)`;
   previewImg.style.transform = `rotate(${rotate}deg) scale(${flipHorizontal}, ${flipVertical})`;
 };
 
@@ -55,7 +58,20 @@ filterOptions.forEach((option) => {
       filterSlider.max = "100";
       filterSlider.value = grayscale;
       filterValue.innerText = `${grayscale}%`;
-    } else {
+    } else if (option.id === "hue-rotate") {
+      filterSlider.max = "360"
+      filterSlider.value = hueRotate
+      filterValue.innerText = `${hueRotate}deg`
+    } else if(option.id === "sepia") {
+      filterSlider.max = "100"
+      filterSlider.value = sepia
+      filterValue.innerText = `${sepia}%`
+    } else if(option.id === "blurImage") {
+      filterSlider.max = "20"
+      filterSlider.value = blurImage
+      filterValue.innerText = `${blurImage}px`
+    }
+      else {
       filterSlider.max = "200";
       filterSlider.value = contrast;
       filterValue.innerText = `${contrast}%`
@@ -75,8 +91,15 @@ const updateFilter = () => {
     inversion = filterSlider.value;
   } else if (selectedFilter.id === 'grayscale'){
     grayscale = filterSlider.value;
-  } else {
-    contrast = filterSlider.value
+  } else if(selectedFilter.id === "hue-rotate") {
+    hueRotate = filterSlider.value;
+  } else if(selectedFilter.id === "sepia") {
+    sepia = filterSlider.value;
+  } else if(selectedFilter.id === "blurImage") {
+    blurImage = filterSlider.value;
+  }
+  else {
+    contrast = filterSlider.value;
   }
   applyFilter();
 };
@@ -97,12 +120,16 @@ rotateOptions.forEach((option) => {
 });
 
 const resetFilters = () => {
-  ((brightness = "100"),
+    (brightness = "100"),
     (saturation = "100"),
     (inversion = "0"),
-    (grayscale = "0"));
+    (grayscale = "0"),
+    (hueRotate = "0"),
+    (sepia = "0"),
+    (blurImage = "0"),
+    (contrast = "0")
 
-  ((rotate = 0), (flipHorizontal = 1), (flipVertical = 1));
+  (rotate = 0), (flipHorizontal = 1), (flipVertical = 1);
 
   filterOptions[0].click();
   applyFilter();
