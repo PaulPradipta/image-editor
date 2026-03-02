@@ -129,7 +129,7 @@ const resetFilters = () => {
     (hueRotate = "0"),
     (sepia = "0"),
     (blurImage = "0"),
-    (contrast = "100")
+    (contrast = "100"),
 
   (rotate = 0), (flipHorizontal = 1), (flipVertical = 1);
 
